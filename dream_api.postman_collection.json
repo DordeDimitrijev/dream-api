@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "95fe4859-db11-458f-ab87-bcfd2806ac73",
+		"name": "dream_api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add dream",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Lost a loved one\",\r\n    \"description\":\"Lost my best friend\",\r\n    \"date\":\"2011-11-15\",\r\n    \"type\":\"Sad\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4200/api/dream",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"api",
+						"dream"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all dreams",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4200/api/dream",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"api",
+						"dream"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete dream by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:4200/api/dream/604cbed5a75d794090173b49",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"api",
+						"dream",
+						"604cbed5a75d794090173b49"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update dream",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"updated name\",\r\n    \"description\":\"updated description\",\r\n    \"date\":\"2021-11-03\",\r\n    \"type\":\"Happy\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:4200/api/dream/604cbf4746c7239d24ebedf4",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"api",
+						"dream",
+						"604cbf4746c7239d24ebedf4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get dream types",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4200/api/dream-type",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"api",
+						"dream-type"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search by dream",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:4200/api/dream/search?perPage=10&startDate=2011-11-15&endDate=2011-11-15&title=a&sortBy=type&order=-1",
+					"host": [
+						"localhost"
+					],
+					"port": "4200",
+					"path": [
+						"api",
+						"dream",
+						"search"
+					],
+					"query": [
+						{
+							"key": "perPage",
+							"value": "10"
+						},
+						{
+							"key": "startDate",
+							"value": "2011-11-15"
+						},
+						{
+							"key": "endDate",
+							"value": "2011-11-15"
+						},
+						{
+							"key": "title",
+							"value": "a"
+						},
+						{
+							"key": "sortBy",
+							"value": "type"
+						},
+						{
+							"key": "order",
+							"value": "-1"
+						},
+						{
+							"key": "type",
+							"value": "Scary",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Search for dream  by it's details.\r\nSearch using range of dates and quering over title.\r\nYou can also use pagination and sorting."
+			},
+			"response": []
+		}
+	]
+}
