@@ -14,10 +14,10 @@ export interface IDream extends Document {
     type:Type;
 }
 const DreamSchema: Schema = new Schema({
-    title : { type:String, required:true},
+    title : { type:String, required:true, lowercase:true},
     description : { type:String, required:true},
     date : { type:Date, required:true},
-    type : { type:String, enum:Type, required:true}
+    type : { type:String, enum:Type, required:true }
 })
 
-export const Dream:Model<IDream> = model('Dream',DreamSchema);
+export const Dream = model<IDream>('Dream',DreamSchema);
