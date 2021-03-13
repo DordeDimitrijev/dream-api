@@ -1,10 +1,10 @@
 import { model,Document, Model, Schema } from "mongoose";
 
 export enum Type{
-    Happy,
-    Sad,
-    Exciting,
-    Scary
+    Happy="Happy",
+    Sad="Sad",
+    Exciting="Exciting",
+    Scary="Scary"
 }
 
 export interface IDream extends Document {
