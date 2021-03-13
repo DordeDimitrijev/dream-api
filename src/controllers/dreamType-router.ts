@@ -6,7 +6,7 @@ const router:Router = Router();
 
 router.get('/',(req:Request,res:Response)=>{
 
-const dreamType:(string | Type)[] =Object.keys(Type).filter(element => isNaN(Number(element))); 
+const dreamType:string[] =Object.keys(Type) 
 log.warn("Dream types:",dreamType);
 return res.status(200).send(dreamType);
 })
