@@ -17,7 +17,9 @@
     "sequelize-cli": "^6.2.0"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-validator": "^6.10.0",
     "pg": "^8.5.1",
     "sequelize": "^6.6.2",
     "sequelize-auto": "^0.8.2"

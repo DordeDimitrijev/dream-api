@@ -1,7 +1,9 @@
 import express from 'express';
 import { Dream } from '../../db/models';
 import queryBuilder from '../helpers/query-helper';
-
+import { query,validationResult} from "express-validator";
+import searchValidator from '../helpers/validator';
+import { getPagination, getPagingData } from '../helpers/pagination';
 const router = express.Router();
 
 router.get('', async (req, res) => {
@@ -51,26 +53,36 @@ router.put('/:id', async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-router.get('/search', async (req, res) => {
-  const { title, type, startDate, endDate, perPage } = req.query;
-  if (startDate == undefined || endDate == undefined) {
-    res.status(400).json({ message: 'Date range not selected' });
+router.get('/search',searchValidator() ,async (req, res) => {
+  const { p ,size } = req.query;
+  // if (startDate == undefined || endDate == undefined) {
+  //   res.status(400).json({ message: 'Date range not selected' });
+  // }
+  const valResult=validationResult(req)
+  if(!valResult.isEmpty()){
+   return res.status(400).json(valResult);
   }
   console.log(req.query);
-
   const query = queryBuilder(req.query);
 
   const orderTypes = ['ASC', 'DESC'];
-  const orderByArr = ['data', 'type', 'title', 'description'];
+  const orderByArr = ['date', 'type', 'title', 'description'];
+  
   const order = orderTypes.includes(req.query.order) ? req.query.order : 'ASC';
   const orderBy = orderByArr.includes(req.query.orderBy)
     ? req.query.orderBy
     : 'title';
-  const result = await Dream.findAll(
-    { where: query },
-    { order: [orderBy, order] }
-  );
-  res.status(200).json(result);
+    const { limit, offset } = getPagination(p, size);
+ 
+    const result = await Dream.findAndCountAll(
+   
+    {limit,offset, where: query,order:[ [orderBy,order]] },
+    
+  ).then(data =>{
+    const result = getPagingData(data,p,limit)
+    res.status(200).json(result);
+  });
+  
 });
 
 export default router;
