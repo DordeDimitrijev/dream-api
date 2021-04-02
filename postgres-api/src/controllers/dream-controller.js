@@ -53,11 +53,9 @@ router.put('/:id', async (req, res) => {
     res.status(400).json({ message: error.message });
   }
 });
-router.get('/search',searchValidator() ,async (req, res) => {
+router.get('/search',searchValidator() , (req, res) => {
   const { p ,size } = req.query;
-  // if (startDate == undefined || endDate == undefined) {
-  //   res.status(400).json({ message: 'Date range not selected' });
-  // }
+ 
   const valResult=validationResult(req)
   if(!valResult.isEmpty()){
    return res.status(400).json(valResult);
@@ -74,7 +72,8 @@ router.get('/search',searchValidator() ,async (req, res) => {
     : 'title';
     const { limit, offset } = getPagination(p, size);
  
-    const result = await Dream.findAndCountAll(
+     Dream.findAndCountAll(
+
    
     {limit,offset, where: query,order:[ [orderBy,order]] },
     
