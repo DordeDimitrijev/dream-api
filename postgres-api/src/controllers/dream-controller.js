@@ -1,7 +1,7 @@
-import express, { response } from 'express';
+import express from 'express';
 import { Dream } from '../../db/models';
 import queryBuilder from '../helpers/query-helper';
-import { query,validationResult} from "express-validator";
+import {validationResult} from "express-validator";
 import searchValidator from '../helpers/validator';
 import { getPagination, getPagingData } from '../helpers/pagination';
 import { responseApi } from '../helpers/response-api';
@@ -21,7 +21,7 @@ router.post('', async (req, res) => {
     const dream = await Dream.create(req.body);
     res.status(201).json(responseApi(201,dream,"Dream created"));
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json(responseApi(400,error));
   }
 });
 
@@ -56,7 +56,7 @@ router.put('/:id', async (req, res) => {
     
     res.status(200).json(responseApi(200,updatedDream));
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json(responseApi(400,error));
   }
 });
 router.get('/search',searchValidator() , (req, res) => {
