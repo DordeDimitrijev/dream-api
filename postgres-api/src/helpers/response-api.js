@@ -1,30 +1,29 @@
-const responseApi = (status, result, message) => {
+const responseApi = (status, data, message) => {
   if (status >= 400 && message) {
     return {
       status,
       error: {
-        errorMessage: message,
+        message,
       },
     };
-  }
-  if (result >= 400) {
+  } else if (status >= 400) {
     return {
       status,
-      error: result,
+      error: {
+        type: data.name,
+        message: data.message,
+      },
     };
-  }
-  if ((status) => 200 && status < 300 && message) {
+  } else if (status >= 200 && status < 300 && message) {
     return {
       status,
       message,
-      data: result,
+      data,
     };
-  }
-
-  if ((status) => 200 && status < 300) {
+  } else if (status >= 200 && status < 300) {
     return {
       status,
-      data: result,
+      data,
     };
   }
 };
